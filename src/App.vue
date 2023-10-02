@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
+  <Navbar />
   <main>
     <div class="content">
       <RouterView />
@@ -21,6 +23,13 @@ body {
   height: 100%;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
+}
+
+#app{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 h1 {

@@ -9,7 +9,7 @@
 
 <style scoped>
 .navbar {
-   width: 10%; 
+   width: 300px; 
    height: 100vh; 
    left: 0%;
    background-color: #333; 
