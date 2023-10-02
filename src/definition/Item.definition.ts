@@ -1,5 +1,5 @@
-class Item {
-    id: number
-    status: string
-    label: string
+interface Item {
+  id: number;
+  status: string;
+  label: string;
 }

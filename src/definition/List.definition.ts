@@ -1,5 +1,4 @@
-
-class List {
-    name: string
-    itemsList: Item[]
+interface List {
+  name: string;
+  itemsList: Item[];
 }
