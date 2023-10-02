@@ -6,4 +6,12 @@ import Navbar from "../components/Navbar.vue"
 
 <template>
   <Navbar></Navbar>
+
+    <header>
+      <h1>To-Do</h1>
+    </header>
 </template>
+
+<style scoped>
+
+</style>
