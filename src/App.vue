@@ -49,4 +49,8 @@ header {
   width: 100%;
   border-bottom: 2px solid #dfdddd;
 }
+
+.button-nav{
+  padding: 30px 0px;
+}
 </style>
