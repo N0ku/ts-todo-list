@@ -5,7 +5,7 @@ interface TodoCardStoreStage {
   products: TodoCard[];
 }
 
-export interface TodoCard {
+interface TodoCard {
   id: number;
   statut: Statut;
   label: string;
@@ -13,12 +13,14 @@ export interface TodoCard {
 
 interface TodoListStoreStage {
   allLists: TodoList[];
+  showModal: boolean;
 }
 
-export interface TodoList {
+interface TodoList {
   id: number;
-  created_at: Date;
   title: string;
+  date: Date;
+  items: TodoCard[];
 }
 
 export const useTodoCard = defineStore("TodoCard", {
@@ -46,10 +48,14 @@ export const useTodoCard = defineStore("TodoCard", {
 export const useTodoList = defineStore("TodoList", {
   state: (): TodoListStoreStage => ({
     allLists: [],
+    showModal: false,
   }),
   getters: {
     getLists(state): TodoList[] {
       return state.allLists;
+    },
+    getShowModal(state): boolean {
+      return state.showModal;
     },
   },
   actions: {
@@ -57,10 +63,14 @@ export const useTodoList = defineStore("TodoList", {
       this.allLists = allLists;
     },
     addList({ list }: { list: TodoList }) {
-      this.allLists.push(list);
+      let copyLists = { ...list };
+      this.allLists.push(copyLists);
     },
     removeList({ id }: { id: number }) {
       this.allLists = this.allLists.filter((list) => list.id !== id);
+    },
+    setShowModal({ showModal }: { showModal: boolean }) {
+      this.showModal = showModal;
     },
   },
 });

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-defineProps({
-  title: { type: String, required: true },
-  handleClick: { type: Function, required: true },
-});
+defineProps<{ title: string; handleClick: () => void }>();
 </script>
 <template lang="">
         <button class="button-primary" v-on:click="handleClick">

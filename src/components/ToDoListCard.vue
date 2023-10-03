@@ -1,7 +1,9 @@
 <script setup lang="ts">
-    defineProps({
-        list: { type: Object, required: true },
-    });
+import { defineProps } from "vue";
+import type { ToDoList } from "@/types/todoList";
+
+defineProps<{ list: ToDoList }>();
+
 </script>
 
 <template lang="">
@@ -22,61 +24,61 @@
         </span>
         <div>
             <p class="title-to-do-list">
-                Ma liste de course
+                {{ list.title }}
             </p>
-            <p class="date-to-do-list">
-                12/12/2021
-            </p>
+          <p class="date-to-do-list">
+                {{ list.date.getDate() }}/{{ list.date.getMonth() + 1 }}/{{ list.date.getFullYear() }}
+            </p> 
         </div>
     </div>
 </template>
 <style scoped>
-.to-do-list-card{
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    border: 1px solid #dfdddd;
-    width: 20%;
-    height: 100px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    margin: 20px 10px;
+.to-do-list-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  border: 1px solid #dfdddd;
+  width: 20%;
+  height: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  margin: 20px 10px;
 }
-.title-to-do-list{
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.to-do-list-card:hover{
-    transform: scale(1.03);
-    border-color: #3b40d5;
-}
-.delete-to-do-list{
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
+.title-to-do-list {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
-.to-do-list-card:hover .delete-to-do-list{
-    opacity: 1;
+.to-do-list-card:hover {
+  transform: scale(1.03);
+  border-color: #3b40d5;
+}
+.delete-to-do-list {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
-.delete-to-do-list:hover svg{
-    fill: #d53b3b;
+.to-do-list-card:hover .delete-to-do-list {
+  opacity: 1;
 }
 
-svg{
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    transition:all 0.3s ease-in-out;
+.delete-to-do-list:hover svg {
+  fill: #d53b3b;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
 }
 </style>
