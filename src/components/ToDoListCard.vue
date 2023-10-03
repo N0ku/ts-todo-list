@@ -26,6 +26,8 @@
 </template>
 <script>
 export default {};
+
+
 </script>
 <style scoped>
 .to-do-list-card{
@@ -37,7 +39,7 @@ export default {};
     margin-bottom: 20px;
     border: 1px solid #dfdddd;
     width: 20%;
-    height: 200px;
+    height: 100px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     position: relative;
@@ -54,8 +56,8 @@ export default {};
 }
 .delete-to-do-list{
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    top: 10px;
+    right: 0px;
     cursor: pointer;
     opacity: 0;
     transition: all 0.3s ease-in-out;

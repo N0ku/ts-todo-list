@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import ButtonPrimaryVue from "../components/ButtonPrimary.vue";
 import ToDoListCard from "../components/ToDoListCard.vue";
+
+const createNewToDoList = () => {
+  console.log("createNewToDoList");
+};
 </script>
 
 
@@ -9,9 +13,10 @@ import ToDoListCard from "../components/ToDoListCard.vue";
     <h1>To-Do</h1>
   </header>
   <div class="button-nav">
-    <ButtonPrimaryVue />
+  <ButtonPrimaryVue title="Créer une To-Do liste" :handleClick="createNewToDoList" />
+
   </div>
-  <section class="list-card-container flex">
+  <section class="list-card-container flex"> <!-- TODO : Foreach à faire pour les cards -->
     <ToDoListCard />
     <ToDoListCard />
     <ToDoListCard />

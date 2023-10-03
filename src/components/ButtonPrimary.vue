@@ -1,5 +1,11 @@
+<script setup lang="ts">
+defineProps({
+  title: { type: String, required: true },
+  handleClick: { type: Function, required: true },
+});
+</script>
 <template lang="">
-        <button class="button-primary">
+        <button class="button-primary" v-on:click="handleClick">
       <svg
         width="800px"
         height="800px"
@@ -14,12 +20,9 @@
           fill="white"
         />
       </svg>
-      <span>Créer une To-Do liste</span>
+      <span>{{title}}</span>
     </button>
 </template>
-<script>
-export default {};
-</script>
 <style scoped>
 .button-primary {
   background-color: #3b40d5;
@@ -35,6 +38,12 @@ export default {};
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-primary:hover {
+  background-color: #3b40d5;
+  opacity: 0.8;
 }
 
 svg {
