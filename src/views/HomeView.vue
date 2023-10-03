@@ -8,7 +8,7 @@ import { computed, reactive, toRefs } from "vue";
 const useTodoListStore = useTodoList();
 
 const todoList = reactive<ToDoList>({
-  id: new Date(),
+  id: 0,
   title: "",
   date: new Date(),
   items: [],
@@ -65,7 +65,7 @@ const handleCloseModal = () => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .list-card-container {
   flex-wrap: wrap;
   display: flex;

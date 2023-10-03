@@ -1,14 +1,29 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { ToDoList } from "@/types/todoList";
+import { useTodoList } from "@/stores/globalStorage";
+
+const useTodoListStore = useTodoList();
 
 defineProps<{ list: ToDoList }>();
 
+function OnClickDeleteList(id: number) {
+    useTodoListStore.removeList({ id: id });
+    useTodoListStore.setShowModalDelete({ showModalDelete: false });
+}
+
+const ShowDeleteConfirmModal = () => {
+  useTodoListStore.setShowModalDelete({ showModalDelete: true });
+};
+
+const HideDeleteConfirmModal = () => {
+  useTodoListStore.setShowModalDelete({ showModalDelete: false });
+};
 </script>
 
 <template lang="">
     <div class="to-do-list-card flex">
-        <span class="delete-to-do-list">
+        <span class="delete-to-do-list" v-on:click="ShowDeleteConfirmModal">
             <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 290 290" xml:space="preserve">
 <g id="XMLID_24_">
@@ -31,6 +46,19 @@ defineProps<{ list: ToDoList }>();
             </p> 
         </div>
     </div>
+  <div
+    class="create-list-modal-container"
+    v-if="useTodoListStore.getShowModalDelete"
+  >
+      <div class="create-list-modal">
+      <h2>Êtes-vous sur de vouloir supprimer cette liste ?</h2>
+      <div class="button-container">
+        <button v-on:click="HideDeleteConfirmModal">Annuler</button>
+        <button v-on:click="OnClickDeleteList(list.id)">Confirmer</button>
+      </div>
+        </div>
+    </div>
+
 </template>
 <style scoped>
 .to-do-list-card {
