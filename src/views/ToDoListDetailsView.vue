@@ -7,6 +7,6 @@ import ModalFormAdd from "@/components/modal/ModalFormAdd.vue";
 <template>
   <div>
     <ListItem />
-    <ModalFormAdd></ModalFormAdd>
+    <ModalFormAdd/>
   </div>
 </template>
