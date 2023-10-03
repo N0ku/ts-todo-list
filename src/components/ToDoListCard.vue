@@ -1,3 +1,9 @@
+<script setup lang="ts">
+    defineProps({
+        list: { type: Object, required: true },
+    });
+</script>
+
 <template lang="">
     <div class="to-do-list-card flex">
         <span class="delete-to-do-list">
@@ -24,11 +30,6 @@
         </div>
     </div>
 </template>
-<script>
-export default {};
-
-
-</script>
 <style scoped>
 .to-do-list-card{
     display: flex;
@@ -43,6 +44,7 @@ export default {};
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     position: relative;
+    margin: 20px 10px;
 }
 .title-to-do-list{
     font-size: 15px;

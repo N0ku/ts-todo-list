@@ -5,7 +5,7 @@ interface TodoCardStoreStage {
   products: TodoCard[];
 }
 
-interface TodoCard {
+export interface TodoCard {
   id: number;
   statut: Statut;
   label: string;
@@ -15,7 +15,7 @@ interface TodoListStoreStage {
   allLists: TodoList[];
 }
 
-interface TodoList {
+export interface TodoList {
   id: number;
   created_at: Date;
   title: string;
