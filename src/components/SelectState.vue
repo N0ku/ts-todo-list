@@ -31,9 +31,9 @@
         >
           <ListboxOption
             as="template"
-            v-for="person in people"
-            :key="person.id"
-            :value="person"
+            v-for="statut in statuts"
+            :key="statut.id"
+            :value="statut"
             v-slot="{ active, selected }"
           >
             <li
@@ -45,14 +45,14 @@
               <div class="flex items-center">
                 <div
                   class="h-5 w-5 flex-shrink-0 rounded-full"
-                  :style="{ backgroundColor: getStatusColor(person.name) }"
+                  :style="{ backgroundColor: getStatusColor(statut.name) }"
                 />
                 <span
                   :class="[
                     selected ? 'font-semibold' : 'font-normal',
                     'ml-3 block truncate',
                   ]"
-                  >{{ person.name }}</span
+                  >{{ statut.name }}</span
                 >
               </div>
 
@@ -84,8 +84,8 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import { ItemStatus, getStatusColor } from "@/type/Item.type";
-
-const people = [
+import { useTodoList } from "@/stores/globalStorage";
+const statuts = [
   {
     id: 1,
     name: ItemStatus.ToDo,
@@ -103,6 +103,12 @@ const people = [
     name: ItemStatus.Done,
   },
 ];
+const useTodoListStore = useTodoList();
+  // useTodoListStore.setLists(newToDoList);
+  //   useTodoListStore.getLists();
+const selected = ref(statuts.find(item => item.name === props.defaultStatus) || statuts[0]);
+const props = defineProps(['defaultStatus']);
+console.log(props.defaultStatus);
+console.log(ref(statuts[0]));
 
-const selected = ref(people[0]);
 </script>

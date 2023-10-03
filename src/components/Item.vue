@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const props = defineProps(['task']);
+const props = defineProps(['task','label']);
+console.log(props.label);
+
+
 import SelectState from "./SelectState.vue";
 import DeleteIcon from "./icons/IconDelete.vue";
 </script>
@@ -26,7 +29,7 @@ import DeleteIcon from "./icons/IconDelete.vue";
         </button>
       </div>
 
-      <SelectState />
+      <SelectState :defaultStatus="props.task.status" />
     </div>
   </div>
 </template>

@@ -5,7 +5,7 @@ export enum ItemStatus {
   Done = "Done",
 }
 
-interface Item {
+export interface Item {
   id: string;
   status: ItemStatus;
   label: string;

@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { Statut } from "./enums";
+import type { List } from "@/type/List.type";
+import { ItemStatus } from "@/type/Item.type";
 
 interface TodoCardStoreStage {
   products: TodoCard[];
@@ -12,7 +14,7 @@ export interface TodoCard {
 }
 
 interface TodoListStoreStage {
-  allLists: TodoList[];
+  allLists: List[];
 }
 
 export interface TodoList {
@@ -43,23 +45,35 @@ export const useTodoCard = defineStore("TodoCard", {
   },
 });
 
-export const useTodoList = defineStore("TodoList", {
+export const useTodoList = defineStore("List", {
   state: (): TodoListStoreStage => ({
-    allLists: [],
+    allLists: [
+      {
+        id: "err",
+        name: "test",
+        itemsList: [
+          {
+            id: "test",
+            status: ItemStatus.Done,
+            label: "zebi",
+          },
+        ],
+      },
+    ],
   }),
   getters: {
-    getLists(state): TodoList[] {
+    getLists(state): List[] {
       return state.allLists;
     },
   },
   actions: {
-    setLists({ allLists }: { allLists: TodoList[] }) {
+    setLists({ allLists }: { allLists: List[] }) {
       this.allLists = allLists;
     },
-    addList({ list }: { list: TodoList }) {
+    addList({ list }: { list: List }) {
       this.allLists.push(list);
     },
-    removeList({ id }: { id: number }) {
+    removeList({ id }: { id: string }) {
       this.allLists = this.allLists.filter((list) => list.id !== id);
     },
   },
