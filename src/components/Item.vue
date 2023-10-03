@@ -1,5 +1,5 @@
 <script setup lang="ts">
-let label: string = "Tâche 1";
+const props = defineProps(['task']);
 import SelectState from "./SelectState.vue";
 import DeleteIcon from "./icons/IconDelete.vue";
 </script>
@@ -11,9 +11,9 @@ import DeleteIcon from "./icons/IconDelete.vue";
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-2">
         <h5
-          class="cols-start-1 col-span-4 mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+          class="cols-start-1 col-span-4 mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50" v-bind:title="task.title"
         >
-          {{ label }}
+          {{ props.task.label }}
         </h5>
       </div>
 
