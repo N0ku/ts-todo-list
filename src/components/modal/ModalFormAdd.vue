@@ -22,8 +22,11 @@ import SelectState from "../SelectState.vue";
               <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                   <div class="grid grid-cols-2 gap-4">
-                    <div class="col-start-1 col-span-2">
+                    <div class="col-start-1 col-span-1">
                       <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900">Add a new task</DialogTitle>
+                    </div>
+                    <div class=" col-span-1 flex justify-end">
+                      <SelectState></SelectState>
                     </div>
                     <div>
                       <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
@@ -33,10 +36,6 @@ import SelectState from "../SelectState.vue";
                         </div>
                       </div>
                     </div>
-
-                  <div class=" col-span-1 flex justify-end">
-                    <SelectState></SelectState>
-                  </div>
 
                   </div>
 
