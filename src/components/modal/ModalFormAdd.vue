@@ -7,11 +7,22 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
+import {v4 as uuidv4} from 'uuid';
+
 
 const open = ref(false);
 import SelectState from "../SelectState.vue";
 import IconAdd from "../icons/IconAdd.vue";
+import Item from "@/components/Item.vue";
+
+let newTask : Item = {id:"", label:"", status:""};
+
+function handleFormSubmit(){
+  newTask.id = uuidv4()
+  console.log(newTask)
+  newTask = {id:"", label:"", status:""}
+}
+
 </script>
 
 <template>
@@ -54,6 +65,13 @@ import IconAdd from "../icons/IconAdd.vue";
             <DialogPanel
               class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
+              <form
+                  name="add-subscriber"
+                  id="myForm"
+                  method="post"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  @submit.prevent="handleFormSubmit">
               <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                   <div class="grid grid-cols-2 gap-4">
@@ -65,6 +83,7 @@ import IconAdd from "../icons/IconAdd.vue";
                       >
                     </div>
                     <div>
+
                       <label
                         for="username"
                         class="block text-sm font-medium leading-6 text-gray-900"
@@ -76,9 +95,7 @@ import IconAdd from "../icons/IconAdd.vue";
                         >
                           <input
                             type="text"
-                            name="username"
-                            id="username"
-                            autocomplete="username"
+                            v-model="newTask.label"
                             class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           />
                         </div>
@@ -86,7 +103,7 @@ import IconAdd from "../icons/IconAdd.vue";
                     </div>
 
                     <div class="col-span-1 flex justify-end">
-                      <SelectState />
+                      <SelectState  v-model="newTask.status"/>
                     </div>
                   </div>
                 </div>
@@ -95,7 +112,7 @@ import IconAdd from "../icons/IconAdd.vue";
                 class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
               >
                 <button
-                  type="button"
+                    type="submit"
                   class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
                   @click="open = false"
                 >
@@ -105,11 +122,13 @@ import IconAdd from "../icons/IconAdd.vue";
                   type="button"
                   class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                   @click="open = false"
+
                   ref="cancelButtonRef"
                 >
                   Cancel
                 </button>
               </div>
+              </form>
             </DialogPanel>
           </TransitionChild>
         </div>

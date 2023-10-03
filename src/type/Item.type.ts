@@ -6,7 +6,7 @@ enum ItemStatus {
 }
 
 interface Item {
-  id: number;
+  id: string;
   status: ItemStatus;
   label: string;
 }
