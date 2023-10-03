@@ -23,13 +23,15 @@ body {
   height: 100%;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-#app{
+#app {
   width: 100%;
   height: 100%;
   display: flex;
   flex-flow: row nowrap;
+  overflow: hidden;
 }
 
 h1 {
@@ -43,14 +45,13 @@ main {
   width: 100%;
   height: 100%;
   padding: 20px;
-
 }
 header {
   width: 100%;
   border-bottom: 2px solid #dfdddd;
 }
 
-.button-nav{
+.button-nav {
   padding: 30px 0px;
 }
 </style>
