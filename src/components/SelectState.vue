@@ -35,6 +35,7 @@
             :key="statut.id"
             :value="statut"
             v-slot="{ active, selected }"
+            @change="onChange(statut.name)"
           >
             <li
               :class="[
@@ -83,8 +84,9 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
-import { ItemStatus, getStatusColor } from "@/type/Item.type";
+import { ItemStatus, getStatusColor, type Item } from "@/type/Item.type";
 import { useTodoList } from "@/stores/globalStorage";
+import type { List } from "@/type/List.type";
 const statuts = [
   {
     id: 1,
@@ -104,11 +106,37 @@ const statuts = [
   },
 ];
 const useTodoListStore = useTodoList();
-  // useTodoListStore.setLists(newToDoList);
-  //   useTodoListStore.getLists();
-const selected = ref(statuts.find(item => item.name === props.defaultStatus) || statuts[0]);
-const props = defineProps(['defaultStatus']);
+// useTodoListStore.setLists(newToDoList);
+function onChange(value: ItemStatus) {
+  const store = useTodoList();
+  let list: List[];
+  list = store.getLists(); // Assurez-vous d'appeler la fonction pour obtenir la liste
+
+  // Recherchez l'élément dans la liste
+  let itemToUpdate: Item | undefined;
+  for (const listEntry of list) {
+    itemToUpdate = listEntry.itemsList.find(
+      (item) => item.id === props.defaultStatus.id
+    );
+    if (itemToUpdate) {
+      itemToUpdate.status = value; // Si l'élément est trouvé, sortez de la boucle
+    }
+  }
+
+  if (itemToUpdate) {
+    // Modifiez l'élément comme vous le souhaitez
+    itemToUpdate.status = value; // Exemple de modification
+    // ...
+
+    // Maintenant, vous pouvez mettre à jour la liste dans le magasin
+    store.setLists({ allLists: list });
+  }
+}
+
+const selected = ref(
+  statuts.find((item) => item.name === props.defaultStatus.name) || statuts[0]
+);
+const props = defineProps(["defaultStatus"]);
 console.log(props.defaultStatus);
 console.log(ref(statuts[0]));
-
 </script>

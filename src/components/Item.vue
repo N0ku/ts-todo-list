@@ -29,7 +29,7 @@ import DeleteIcon from "./icons/IconDelete.vue";
         </button>
       </div>
 
-      <SelectState :defaultStatus="props.task.status" />
+      <SelectState :defaultStatus="props.task" />
     </div>
   </div>
 </template>
