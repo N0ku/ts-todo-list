@@ -1,7 +1,8 @@
 <script setup lang="ts">
-    defineProps({
-        list: { type: Object, required: true },
-    });
+import { defineProps } from "vue";
+import type { ToDoList } from "@/types/todoList";
+
+    defineProps<{list: ToDoList}>();
 </script>
 
 <template lang="">
