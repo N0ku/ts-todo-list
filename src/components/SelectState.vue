@@ -8,10 +8,9 @@
         class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
       >
         <span class="flex items-center">
-          <img
-            :src="selected.avatar"
-            alt=""
+          <div
             class="h-5 w-5 flex-shrink-0 rounded-full"
+            :style="{ backgroundColor: getStatusColor(selected.name) }"
           />
           <span class="ml-3 block truncate">{{ selected.name }}</span>
         </span>
@@ -44,10 +43,9 @@
               ]"
             >
               <div class="flex items-center">
-                <img
-                  :src="person.avatar"
-                  alt=""
+                <div
                   class="h-5 w-5 flex-shrink-0 rounded-full"
+                  :style="{ backgroundColor: getStatusColor(person.name) }"
                 />
                 <span
                   :class="[
@@ -85,30 +83,24 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
+import { ItemStatus, getStatusColor } from "@/type/Item.type";
 
 const people = [
   {
     id: 1,
-    name: "To Do",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnupI1_9vYSqAuC-5JYP6SjegeRIbenJbi2NMClOkB&s",
+    name: ItemStatus.ToDo,
   },
   {
     id: 2,
-    name: "In Progress",
-    avatar:
-      "https://www.photo-denfert.com/upload/image/fond-papier-orange-tangerine---152-bd-p-image-51750-grande.jpg",
+    name: ItemStatus.InProgress,
   },
   {
     id: 3,
-    name: "Block",
-    avatar:
-      "https://img.freepik.com/photos-premium/resume-fond-rouge-decoration-noel-valentines-studio-piece-modele-web-rapport-affaires-couleur-gradient-cercle-lisse_1258-681.jpg",
+    name: ItemStatus.Blocked,
   },
   {
     id: 4,
-    name: "Done",
-    avatar: "https://www.level.fr/wp-content/uploads/2021/01/fond-vert.jpg",
+    name: ItemStatus.Done,
   },
 ];
 

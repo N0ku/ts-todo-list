@@ -1,4 +1,4 @@
-enum ItemStatus {
+export enum ItemStatus {
   ToDo = "ToDo",
   InProgress = "InProgress",
   Blocked = "Blocked",
@@ -18,10 +18,10 @@ const statusMapping: Record<ItemStatus, { color: string }> = {
   [ItemStatus.Blocked]: { color: "red" },
   [ItemStatus.Done]: { color: "green" },
 };
-function getStatusColor(status: ItemStatus): string {
+export function getStatusColor(status: ItemStatus): string {
   if (status in statusMapping) {
     return statusMapping[status].color;
   }
-  // Par défaut, retournez une couleur par défaut si l'état n'est pas trouvé
-  return "gray"; // Vous pouvez définir une couleur par défaut de votre choix
+
+  return "gray";
 }
