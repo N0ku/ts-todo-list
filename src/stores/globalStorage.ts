@@ -18,8 +18,9 @@ interface TodoListStoreStage {
 
 interface TodoList {
   id: number;
-  created_at: Date;
   title: string;
+  date: Date;
+  items: TodoCard[];
 }
 
 export const useTodoCard = defineStore("TodoCard", {
@@ -55,23 +56,21 @@ export const useTodoList = defineStore("TodoList", {
     },
     getShowModal(state): boolean {
       return state.showModal;
-    }
+    },
   },
   actions: {
     setLists({ allLists }: { allLists: TodoList[] }) {
       this.allLists = allLists;
     },
     addList({ list }: { list: TodoList }) {
-      this.allLists.push(list);
+      let copyLists = { ...list };
+      this.allLists.push(copyLists);
     },
     removeList({ id }: { id: number }) {
       this.allLists = this.allLists.filter((list) => list.id !== id);
     },
-    showModal() {
-      this.showModal = true;
+    setShowModal({ showModal }: { showModal: boolean }) {
+      this.showModal = showModal;
     },
-    closeModal() {
-      this.showModal = false;
-    }
   },
 });

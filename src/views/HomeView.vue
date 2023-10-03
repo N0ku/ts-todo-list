@@ -3,35 +3,36 @@ import ButtonPrimaryVue from "../components/ButtonPrimary.vue";
 import ToDoListCard from "../components/ToDoListCard.vue";
 import { useTodoList } from "@/stores/globalStorage";
 import type { ToDoList } from "@/types/todoList";
-import { computed, reactive } from "vue";
+import { computed, reactive, toRefs } from "vue";
 
 const useTodoListStore = useTodoList();
 
 const todoList = reactive<ToDoList>({
+  id: new Date(),
   title: "",
+  date: new Date(),
+  items: [],
 });
 
+const { title } = toRefs(todoList);
+
 const createNewToDoList = () => {
-  const newToDoList: ToDoList = {
-    id: Math.random().toString(36).substr(2, 9),
-    title: "Ma nouvelle liste",
-    date: new Date(),
-    items: [],
-  };
-  useTodoListStore.addList(newToDoList);
+  useTodoListStore.addList({ list: todoList });
+  useTodoListStore.setShowModal({ showModal: false });
+
+  todoList.title = "";
 };
 
 const allTodoLists = computed(() => useTodoListStore.allLists);
 
 const showCreateModal = () => {
-  useTodoListStore.showModal();
-  console.log(useTodoListStore.getShowModal);
+  useTodoListStore.setShowModal({ showModal: true });
 };
 
 const handleCloseModal = () => {
-  useTodoListStore.closeModal();
-  console.log(useTodoListStore.getShowModal);
+  useTodoListStore.setShowModal({ showModal: false });
 };
+
 </script>
 
 
@@ -46,26 +47,16 @@ const handleCloseModal = () => {
     />
   </div>
   <section class="list-card-container flex">
-    <ToDoListCard
-      :list="list"
-      v-for="(list, i) in allTodoLists"
-      :key="i"
-    />
+    <ToDoListCard :list="list" v-for="(list, i) in allTodoLists" :key="i" />
   </section>
 
   <div
     class="create-list-modal-container"
-    v-if="
-      allTodoLists.length === 0 || useTodoListStore.getShowModal
-    "
+    v-if="allTodoLists.length === 0 || useTodoListStore.getShowModal"
   >
     <div class="create-list-modal">
       <h2>Créer une nouvelle liste</h2>
-      <input
-        type="text"
-        placeholder="Titre de la liste"
-        v-model="todoList.title"
-      />
+      <input type="text" placeholder="Titre de la liste" v-model="title" />
       <div class="button-container">
         <button v-on:click="handleCloseModal">Annuler</button>
         <button v-on:click="createNewToDoList">Créer</button>
