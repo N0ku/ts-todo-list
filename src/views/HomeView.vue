@@ -3,15 +3,13 @@ import ButtonPrimaryVue from "../components/ButtonPrimary.vue";
 import ToDoListCard from "../components/ToDoListCard.vue";
 import { useTodoList } from "@/stores/globalStorage";
 import type { ToDoList } from "@/types/todoList";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 
 const useTodoListStore = useTodoList();
 
 const todoList = reactive<ToDoList>({
   title: "",
 });
-
-let showModal = false;
 
 const createNewToDoList = () => {
   const newToDoList: ToDoList = {
@@ -23,12 +21,16 @@ const createNewToDoList = () => {
   useTodoListStore.addList(newToDoList);
 };
 
+const allTodoLists = computed(() => useTodoListStore.allLists);
+
 const showCreateModal = () => {
-  showModal = true;
+  useTodoListStore.showModal();
+  console.log(useTodoListStore.getShowModal);
 };
 
 const handleCloseModal = () => {
-  showModal = false;
+  useTodoListStore.closeModal();
+  console.log(useTodoListStore.getShowModal);
 };
 </script>
 
@@ -46,12 +48,17 @@ const handleCloseModal = () => {
   <section class="list-card-container flex">
     <ToDoListCard
       :list="list"
-      v-for="(list, i) in useTodoListStore.allLists"
+      v-for="(list, i) in allTodoLists"
       :key="i"
     />
   </section>
 
-  <div class="create-list-modal-container" v-if="showModal" >
+  <div
+    class="create-list-modal-container"
+    v-if="
+      allTodoLists.length === 0 || useTodoListStore.getShowModal
+    "
+  >
     <div class="create-list-modal">
       <h2>Créer une nouvelle liste</h2>
       <input
@@ -97,7 +104,7 @@ const handleCloseModal = () => {
   justify-content: space-between;
 }
 
-.create-list-modal .button-container{
+.create-list-modal .button-container {
   display: flex;
   justify-content: space-between;
 }
@@ -109,7 +116,7 @@ const handleCloseModal = () => {
   margin-bottom: 20px;
 }
 
-.create-list-modal button{
+.create-list-modal button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -118,11 +125,11 @@ const handleCloseModal = () => {
   transition: all 0.3s ease-in-out;
   background-color: #0645ce;
 }
-.create-list-modal button:hover{
+.create-list-modal button:hover {
   opacity: 0.8;
 }
 
-.create-list-modal button:first-child{
+.create-list-modal button:first-child {
   background-color: #d53b3b;
 }
 
