@@ -3,8 +3,6 @@ import Item from "../components/Item.vue";
 </script>
 <template>
   <div class="list">
-    <h1>ToDo List</h1>
-    <p>Paramètre 'id' dans l'URL : {{ $route.params.id }}</p>
     <Item />
   </div>
 </template>
